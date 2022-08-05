@@ -3,10 +3,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 export default function CoverImage({ title, url, slug }) {
+  const API_URL=`http://latteblog.herokuapp.com`
   const imageUrl = `${
-    url.startsWith('/') ? process.env.NEXT_PUBLIC_STRAPI_API_URL : ''
+    url.startsWith('/') ? API_URL : ''
   }${url}`
-
   const image = (
     <Image
       width={2000}

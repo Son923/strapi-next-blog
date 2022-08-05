@@ -6,24 +6,28 @@ import Layout from '@/components/layout'
 import { getAllPostsForHome } from '@/lib/api'
 import Head from 'next/head'
 import { CMS_NAME } from '@/lib/constants'
+import { he } from 'date-fns/locale'
 
 export default function Index({ allPosts, preview }) {
-  const heroPost = allPosts[0]
+  const heroPost = allPosts[0].attributes
   const morePosts = allPosts.slice(1)
+  const author = heroPost.author.data.attributes
+  const coverImage = {...heroPost.coverImage.data[0].attributes}
+
   return (
     <>
       <Layout preview={preview}>
         <Head>
-          <title>Next.js Blog Example with {CMS_NAME}</title>
+          <title>SaikaBlog</title>
         </Head>
         <Container>
           <Intro />
           {heroPost && (
             <HeroPost
               title={heroPost.title}
-              coverImage={heroPost.coverImage}
+              coverImage={coverImage}
               date={heroPost.date}
-              author={heroPost.author}
+              author={author}
               slug={heroPost.slug}
               excerpt={heroPost.excerpt}
             />

@@ -52,13 +52,13 @@ export default function Post({ post, morePosts, preview }) {
 
 export async function getStaticProps({ params, preview = null }) {
   const data = await getPostAndMorePosts(params.slug, preview)
-  const content = await markdownToHtml(data?.posts[0]?.content || '')
+  const content = await markdownToHtml(data?.posts.data[0]?.attributes.content || '')
 
   return {
     props: {
       preview,
       post: {
-        ...data?.posts[0],
+        ...data?.posts.data[0]?.attributes,
         content,
       },
       morePosts: data?.morePosts,
@@ -69,7 +69,7 @@ export async function getStaticProps({ params, preview = null }) {
 export async function getStaticPaths() {
   const allPosts = await getAllPostsWithSlug()
   return {
-    paths: allPosts?.map((post) => `/posts/${post.slug}`) || [],
+    paths: allPosts?.map((post) => `/posts/${post.attributes.slug}`) || [],
     fallback: true,
   }
 }
