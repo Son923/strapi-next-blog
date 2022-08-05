@@ -18,7 +18,7 @@ export default function Index({ allPosts, preview }) {
     <>
       <Layout preview={preview}>
         <Head>
-          <title>SaikaBlog</title>
+          <title>Latte Blog</title>
         </Head>
         <Container>
           <Intro />
